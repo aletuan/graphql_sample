@@ -1,0 +1,24 @@
+{
+  "name": "noncrowbet",
+  "version": "1.0.0",
+  "description": "simple graphql server implement",
+  "main": "server.js",
+  "dependencies": {},
+  "devDependencies": {
+    "express": "^4.16.3",
+    "express-graphql": "^0.6.12",
+    "graphql": "^0.13.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "graphql",
+    "testing",
+    "demo",
+    "poc"
+  ],
+  "author": "andy",
+  "license": "ISC"
+}
