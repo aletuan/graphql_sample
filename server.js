@@ -15,10 +15,14 @@ var schema = buildSchema(`
 	type Mutation {
 		updateCourseTopic(id: Int!, topic: String!): Course
 	},
+	type Author {
+		firstName: String
+		lastName: String
+	},
 	type Course {
 		id: Int
 		title: String
-		author: String
+		author: Author
 		description: String
 		topic: String
 		url: String
@@ -30,7 +34,10 @@ const coursesData = [
     {
         id: 1,
         title: 'The Complete Node.js Developer Course',
-        author: 'Andrew Mead, Rob Percival',
+        author: {
+        	firstName: 'Anh',
+        	lastName: 'Le'
+        },
         description: 'Learn Node.js by building real-world applications with Node, Express, MongoDB, Mocha, and more!',
         topic: 'Node.js',
         url: 'https://codingthesmartway.com/courses/nodejs/'
@@ -38,7 +45,10 @@ const coursesData = [
     {
         id: 2,
         title: 'Node.js, Express & MongoDB Dev to Deployment',
-        author: 'Brad Traversy',
+        author: {
+        	firstName: 'Brad',
+        	lastName: 'Traversy'
+        },
         description: 'Learn by example building & deploying real-world Node.js applications from absolute scratch',
         topic: 'Node.js',
         url: 'https://codingthesmartway.com/courses/nodejs-express-mongodb/'
@@ -46,7 +56,10 @@ const coursesData = [
     {
         id: 3,
         title: 'JavaScript: Understanding The Weird Parts',
-        author: 'Anthony Alicea',
+        author: {
+        	firstName: 'Anthony',
+        	lastName: 'Alicea'
+        },
         description: 'An advanced JavaScript course for everyone! Scope, closures, prototypes, this, build your own framework, and more.',
         topic: 'JavaScript',
         url: 'https://codingthesmartway.com/courses/understand-javascript/'
@@ -170,6 +183,18 @@ app.use('/graphql', graphqlHTTP({
 //   "id": 1,
 //   "topic": "JavaScript"
 // }
+// Query with nested data structure
+// {
+//   course(id: 2) {
+//     id
+//     title
+//     author {
+//       firstName
+//       lastName
+//     }
+//   }
+// }
+
 
 app.listen(4000, () => console.log('Up in port 4000/graphql'));
 
