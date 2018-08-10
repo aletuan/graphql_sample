@@ -12,6 +12,9 @@ var schema = buildSchema(`
 		course(id: Int!): Course
 		courses(topic: String!): [Course]
 	},
+	type Mutation {
+		updateCourseTopic(id: Int!, topic: String!): Course
+	},
 	type Course {
 		id: Int
 		title: String
@@ -68,11 +71,22 @@ const getCourses = (args) => {
 	}
 }
 
+var updateCourseTopic = function({id, topic}) {
+    coursesData.map(course => {
+        if (course.id === id) {
+            course.topic = topic;
+            return course;
+        }
+    });
+    return coursesData.filter(course => course.id === id) [0];
+}
+
 // root resolver
 // note 1: mapping actions to functions. in here, action is message
 var root = { 
 	course: getCourse,
-	courses: getCourses
+	courses: getCourses,
+	updateCourseTopic: updateCourseTopic
 };
 
 var app = express();
@@ -135,6 +149,26 @@ app.use('/graphql', graphqlHTTP({
 // { 
 //     "courseID1":1,
 //     "courseID2":2
+// }
+
+// Mutation function to call on client side
+// mutation updateCourseTopic($id: Int!, $topic: String!) {
+//   updateCourseTopic(id: $id, topic: $topic) {
+//     ... courseFields
+//   }
+// }
+
+// fragment courseFields on Course {
+//   title
+//   author
+//   description
+//   topic
+//   url
+// }
+// Query variable
+// {
+//   "id": 1,
+//   "topic": "JavaScript"
 // }
 
 app.listen(4000, () => console.log('Up in port 4000/graphql'));
