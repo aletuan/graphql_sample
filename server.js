@@ -114,5 +114,28 @@ app.use('/graphql', graphqlHTTP({
 //   "courseTopic": "Node.js"
 // }
 
+// Fragement
+// When combine different queries into a single resource
+// Using fragment to avoid duplicate query in same set of fields
+// query getCouseWithFragments($courseID1: Int!, $courseID2: Int!) {
+//   course1: course(id: $courseID1) {
+//     ...courseFields
+//   },
+//   course2: course(id: $courseID2) {
+//     ...courseFields
+//   }
+// }
+
+// fragment courseFields on Course {
+//   title
+//   author
+//   description
+// }
+// Query variable
+// { 
+//     "courseID1":1,
+//     "courseID2":2
+// }
+
 app.listen(4000, () => console.log('Up in port 4000/graphql'));
 
